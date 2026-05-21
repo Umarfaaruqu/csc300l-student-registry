@@ -401,7 +401,8 @@ const tableBody = document.getElementById("tableBody");
 const countDisplay = document.getElementById("countDisplay");
 
 // Use relative URL so it works seamlessly both on localhost and when hosted online
-const API_URL = '/api/students';
+// Replace this line in your public/index.html script:
+const API_URL = 'https://csc300l-student-registry.onrender.com/api/students';
 
 // Fetch existing data from backend on page load
 async function loadStudents() {
