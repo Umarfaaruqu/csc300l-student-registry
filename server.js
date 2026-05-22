@@ -9,8 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve front-end static files (vital for hosting everything on one service)
-app.use(express.static(path.join(__dirname, 'public')));
+// REMOVED: Static file serving line deleted so this server runs strictly as a headless API Gateway.
 
 // MongoDB Connection
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/student_records";
@@ -33,6 +32,14 @@ const studentSchema = new mongoose.Schema({
 const Student = mongoose.model('Student', studentSchema);
 
 // API Endpoints
+
+// 0. Root Welcome Route (Displays pure JSON instead of a webpage)
+app.get('/', (req, res) => {
+  res.json({
+    status: "success",
+    message: "CSC300L Student Registry Backend API Engine is running smoothly. Access data records at /api/students"
+  });
+});
 
 // 1. Get all registered students
 app.get('/api/students', async (req, res) => {
